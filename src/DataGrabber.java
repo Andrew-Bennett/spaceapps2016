@@ -10,6 +10,7 @@ public class DataGrabber {
 	public static void main(String[] cheese) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Document doc;
 		try {
 			doc = Jsoup.connect("http://en.wikipedia.org/").get();
@@ -23,6 +24,8 @@ public class DataGrabber {
 =======
 =======
 >>>>>>> master
+=======
+>>>>>>> master
 		
 >>>>>>> master
 		Document doc2;
@@ -33,6 +36,7 @@ public class DataGrabber {
 			Elements route = doc2.select(".route");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			Elements flight = doc2.select("#mainAreaLeftColumn flightName");
 			Element info = doc2.select("table").get(4);
 			System.out.println(route);
@@ -40,6 +44,8 @@ public class DataGrabber {
 			System.out.println(info);
 
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 			Elements flight = doc2.select("td.statusValue");
