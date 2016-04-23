@@ -17,24 +17,24 @@ public class DataGrabber {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Document doc2;
 		try {
 			doc2 = Jsoup.connect("http://www.flightstats.com/go/FlightStatus/flightStatusByFlight.do?airline=BA&flightNumber=0105").userAgent("Mozilla").data("name", "jsoup").get();
 			Elements route = doc2.select(".route");
-			Elements flight = doc2.select("#mainAreaLeftColumn");
+			Elements flight = doc2.select("#mainAreaLeftColumn flightName");
 			Element info = doc2.select("table").get(4);
 			System.out.println(route);
 			System.out.println(flight);
 			System.out.println(info);
-		
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
-	
+
+
 
 }
