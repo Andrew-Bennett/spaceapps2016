@@ -39,8 +39,7 @@ public class DataGrabber {
 			//System.out.println("Flight route: " + route.text());
 			//System.out.println("Scheduled departure time: " + dep.text());
 			//System.out.println("Scheduled arrival time: " + arr.text());
-		
-		} catch (IOException e) {
+        } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -113,7 +112,7 @@ public class DataGrabber {
 		int year = Integer.parseInt(time.substring(dash2+1, dash2+5));
 		return new GregorianCalendar(year, month, day, hour, minute);
 	}
-	
-	
+
+
 
 }
