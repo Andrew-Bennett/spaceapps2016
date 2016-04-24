@@ -1,3 +1,5 @@
+package com.example.thomas.delaypsychic;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -8,6 +10,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class DataGrabber {
+	public String airline;
+	public String number;
+	public Document doc;
 	private Elements route;
 	private Element dep;
 	private Element arr;
@@ -30,10 +35,10 @@ public class DataGrabber {
 	}
 	
 	public DataGrabber(String flightNo) {
-		String airline = flightNo.substring(0,2); //get airline code from flight no.
-		String number = flightNo.substring(2); //get flight numbeer from flight no.
+		this.airline = flightNo.substring(0,2); //get airline code from flight no.
+		this.number = flightNo.substring(2); //get flight numbeer from flight no.
 		
-		Document doc;
+		//Document doc;
 		//String airline = "BA";
 		//String number = "0105";
 		this.route = null;
@@ -41,27 +46,44 @@ public class DataGrabber {
 		this.arr =  null;
 		this.depEst = null;
 		this.arrEst = null;
+////		try {
+////			doc = Jsoup.connect(String.format("http://www.flightstats.com/go/FlightStatus/flightStatusByFlight.do?airline=%s&flightNumber=%s", airline, number)).userAgent("Mozilla").data("name", "jsoup").get();
+////			route = doc.select(".route"); //pull route string
+////			Elements flight = doc.select("td.statusValue");
+////			dep = flight.select("td").get(0);
+////			arr = flight.select("td").get(1);
+////			try {
+////				depEst = flight.select("td").get(2);
+////				arrEst = flight.select("td").get(3);
+////			}
+////			catch (IndexOutOfBoundsException e)
+////			{
+////
+////			}
+//
+//			//System.out.println("Flight route: " + route.text());
+//			//System.out.println("Scheduled departure time: " + dep.text());
+//			//System.out.println("Scheduled arrival time: " + arr.text());
+//        } catch (IOException e) {
+//		  }
+
+		GrabberTask grabTask = new GrabberTask(this);
+		grabTask.execute();
 		try {
-			doc = Jsoup.connect(String.format("http://www.flightstats.com/go/FlightStatus/flightStatusByFlight.do?airline=%s&flightNumber=%s", airline, number)).userAgent("Mozilla").data("name", "jsoup").get();
-			route = doc.select(".route"); //pull route string
-			Elements flight = doc.select("td.statusValue");
-			dep = flight.select("td").get(0);
-			arr = flight.select("td").get(1);
-			try {
-				depEst = flight.select("td").get(2);
-				arrEst = flight.select("td").get(3);
-			}
-			catch (IndexOutOfBoundsException e)
-			{
-				
-			}
-			
-			//System.out.println("Flight route: " + route.text());
-			//System.out.println("Scheduled departure time: " + dep.text());
-			//System.out.println("Scheduled arrival time: " + arr.text());
-        } catch (IOException e) {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		
+		route = doc.select(".route"); //pull route string
+		Elements flight = doc.select("td.statusValue");
+		dep = flight.select("td").get(0);
+		arr = flight.select("td").get(1);
+		try {
+			depEst = flight.select("td").get(2);
+			arrEst = flight.select("td").get(3);
+		}
+		catch (IndexOutOfBoundsException e){}
+
 	}
 	
 	public String getDepartureAirport() {
